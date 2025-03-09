@@ -16,13 +16,21 @@ public class NotasService {
         return notasRepository.save(nota);
     }
     
- // Método para eliminar una nota por ID
-    public boolean eliminarNota(Long id) {
-        if (notasRepository.existsById(id)) {
+    public boolean eliminarNota(Long id, String correoUsuarioAutenticado) {
+        Optional<Notas> notaOptional = notasRepository.findById(id);
+        if (notaOptional.isPresent()) {
+            Notas nota = notaOptional.get();
+            
+            // Verificar si el correo electrónico de la nota coincide con el del usuario autenticado
+            if (!nota.getCorreoElectronico().equals(correoUsuarioAutenticado)) {
+                return false; // Si no coinciden, no eliminar
+            }
+
+            // Si la validación es correcta, proceder a eliminar la nota
             notasRepository.deleteById(id);
             return true;
         }
-        return false;  // Retorna false si la nota no existe
+        return false; // Si la nota no existe
     }
     
  // Método para actualizar una nota

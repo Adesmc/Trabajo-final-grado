@@ -8,13 +8,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import project.multimedia.Multimedia;
 
+
 @Entity
 public class Notas {
 	
 	@Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	
+	private String correoElectronico;	
 	private String titulo;
 	private String campanya;
 	private String descripcion;
@@ -82,6 +83,12 @@ public class Notas {
 	}
 	public void setIcono(Multimedia icono) {
 		this.icono = icono;
+	}
+	public String getCorreoElectronico() {
+		return correoElectronico;
+	}
+	public void setCorreoElectronico(String correoElectronico) {
+		this.correoElectronico = correoElectronico;
 	}
 	
 	

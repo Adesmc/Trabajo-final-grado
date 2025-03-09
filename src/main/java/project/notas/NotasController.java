@@ -18,14 +18,15 @@ public class NotasController {
         return ResponseEntity.ok(nuevaNota);
     }
     
- // Método para eliminar una nota por ID
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarNota(@PathVariable Long id) {
-        boolean eliminado = notasService.eliminarNota(id);
+    public ResponseEntity<String> eliminarNota(@PathVariable Long id, @RequestParam String correo) {
+        // Validar la eliminación de la nota
+        boolean eliminado = notasService.eliminarNota(id, correo);
         if (!eliminado) {
-            return ResponseEntity.notFound().build();  // Retorna 404 si la nota no existe
+            return ResponseEntity.status(404).body("No tienes permiso para eliminar esta nota o no existe.");
         }
-        return ResponseEntity.noContent().build();  // Retorna 204 si la eliminación fue exitosa
+
+        return ResponseEntity.ok("Archivo eliminado correctamente.");
     }
     
  // Método para actualizar una nota
