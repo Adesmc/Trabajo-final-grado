@@ -7,8 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-
+@RestController
 public class UsuarioController {
 
 	
@@ -35,7 +36,7 @@ public class UsuarioController {
     }
     
     //INICIAR SESION
-    @GetMapping(value = "/comprobarContrasenya", consumes = "application/x-www-form-urlencoded")
+    @GetMapping(value = "/comprobarContrasenya")
     public ResponseEntity<String> comprobarContrasenya(@RequestParam String correo, @RequestParam String contrasenya) {
     	System.out.println("usando metodo verificar");
         boolean correcto = usuarioService.comprobarContrasenya(correo, contrasenya);
